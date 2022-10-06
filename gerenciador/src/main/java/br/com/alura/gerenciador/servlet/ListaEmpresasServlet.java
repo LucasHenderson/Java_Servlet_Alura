@@ -12,23 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/listaEmpresas")
 public class ListaEmpresasServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		Banco banco = new Banco();
-		List<Empresa> lista = banco.getListaDeEmpresas();
+		List<Empresa> lista = banco.getEmpresas();
 		
-		//guarda os atributos
-		request.setAttribute("listaEmpresas", lista);
+		request.setAttribute("empresas", lista);
 		
-		//fala para onde esses atributos vao
-		RequestDispatcher rd = request.getRequestDispatcher("/listaDeEmpresas.jsp");
-		
-		//envia esses atributos
+		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas.jsp");
 		rd.forward(request, response);
+		
 	}
-
 }
